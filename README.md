@@ -1,6 +1,3 @@
-### 🧾 **README.md**
-
-````markdown
 # 💰 Expense Tracker (FastAPI + React + SQLite)
 
 A simple expense management web app built with **FastAPI (Python)** for the backend, **React** for the frontend, and **SQLite** as the database.
@@ -27,7 +24,7 @@ A simple expense management web app built with **FastAPI (Python)** for the back
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone <repo-url>
+git clone https://github.com/yourusername/expense-tracker.git
 cd expense-tracker
 ````
 
@@ -156,11 +153,17 @@ project/
 
 ---
 
+## 📸 Screenshots
+
+*(Add screenshots of login, dashboard, and expense list here)*
+
+---
+
 ## 🧑‍💻 Author
 
 **Rahul K Milan**
 Junior Software Engineer @ Seguro Technologies
-📧 [[rahulkmilan93@gmail.com](mailto:rahulkmilan93@gmail.com)]
+📧 [[your.email@example.com](mailto:your.email@example.com)]
 
 ---
 
