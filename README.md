@@ -155,7 +155,9 @@ project/
 
 ## 📸 Screenshots
 
-*(Add screenshots of login, dashboard, and expense list here)*
+<img width="1854" height="969" alt="image" src="https://github.com/user-attachments/assets/683171d1-1cf5-414b-80f3-3c8c41526062" />
+<img width="1852" height="971" alt="image" src="https://github.com/user-attachments/assets/8d1df75a-f569-4054-a0ab-774b5918bb92" />
+<img width="1860" height="971" alt="image" src="https://github.com/user-attachments/assets/450cc048-4e5e-43e4-b496-58d3732890d8" />
 
 ---
 
@@ -163,7 +165,7 @@ project/
 
 **Rahul K Milan**
 Junior Software Engineer @ Seguro Technologies
-📧 [[your.email@example.com](mailto:your.email@example.com)]
+📧 [[rahulkmilan93@gmail.com](mailto:rahulkmilan93@gmail.com)]
 
 ---
 
