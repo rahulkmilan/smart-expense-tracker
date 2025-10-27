@@ -1,26 +1,34 @@
-CREATE TABLE IF NOT EXISTS users (
+PRAGMA foreign_keys = ON;
+
+DROP TABLE IF EXISTS expenses;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT,
-  email TEXT
+  name TEXT NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  password_hash TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS categories (
+CREATE TABLE categories (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT
+  name TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS expenses (
+CREATE TABLE expenses (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER,
-  category_id INTEGER,
-  amount REAL,
-  date TEXT,
+  user_id INTEGER NOT NULL,
+  category_id INTEGER NOT NULL,
+  amount NUMERIC NOT NULL,
+  date TEXT NOT NULL, -- YYYY-MM-DD
   note TEXT,
-  FOREIGN KEY(user_id) REFERENCES users(id),
-  FOREIGN KEY(category_id) REFERENCES categories(id)
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE RESTRICT
 );
 
-INSERT INTO users (name, email) VALUES ('Alice', 'alice@example.com'), ('Bob', 'bob@example.com');
-INSERT INTO categories (name) VALUES ('Food'), ('Travel'), ('Bills');
-INSERT INTO expenses (user_id, category_id, amount, date, note)
-VALUES (1, 1, 250, '2025-09-02', 'Lunch'), (1, 2, 400, '2025-09-03', 'Bus Ticket');
+-- sample categories
+INSERT INTO categories (name) VALUES ('Groceries');
+INSERT INTO categories (name) VALUES ('Utilities');
+INSERT INTO categories (name) VALUES ('Transport');
+INSERT INTO categories (name) VALUES ('Entertainment');
