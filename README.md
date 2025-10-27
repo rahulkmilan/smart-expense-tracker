@@ -48,7 +48,7 @@ A **personal expense tracking application** that supports multiple users. Users 
 ### 1. Clone Project
 
 ```bash
-git clone <your-repo-url>
+git clone <repo-url>
 cd SmartExpenseTracker
 ````
 
