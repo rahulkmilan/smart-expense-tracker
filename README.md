@@ -1,194 +1,171 @@
-# Smart Expense Tracker
+### 🧾 **README.md**
 
-A **personal expense tracking application** that supports multiple users. Users can log expenses, view monthly summaries, and analyze spending by category. Built with **FastAPI** (backend), **SQLite** (database), and **React + Vite** (frontend).
+````markdown
+# 💰 Expense Tracker (FastAPI + React + SQLite)
 
----
-
-## Table of Contents
-1. [Features](#features)
-2. [Tech Stack](#tech-stack)
-3. [Setup Instructions](#setup-instructions)
-4. [Database Schema](#database-schema)
-5. [API Endpoints](#api-endpoints)
-6. [Design Choices & Assumptions](#design-choices--assumptions)
-7. [Usage](#usage)
-8. [Optional Improvements](#optional-improvements)
+A simple expense management web app built with **FastAPI (Python)** for the backend, **React** for the frontend, and **SQLite** as the database.
 
 ---
 
-## Features
-
-- Multi-user support
-- Expense logging with categories, date, amount, and notes
-- Monthly summary report by category
-- Interactive React UI to add/view expenses and reports
-- Sample data included for testing
-
----
-
-## Tech Stack
-
-- **Backend:** Python 3.9+, FastAPI
-- **Database:** SQLite
-- **Frontend:** React + Vite
-- **API Client:** fetch (native)
+## 🚀 Features
+- User Registration & Login (JWT Token Authentication)
+- Add, View, and Delete Expenses
+- Dashboard to view expense summary
+- Secure API with FastAPI backend
+- Responsive React frontend
 
 ---
 
-## Setup Instructions
-
-### Prerequisites
-
-- Python 3.9+ installed
-- Node.js 20.19+ or 22.12+ installed
-- Git (optional, if cloning repository)
+## 🧩 Tech Stack
+**Frontend:** React, React Router  
+**Backend:** FastAPI, Python  
+**Database:** SQLite (`expenses1.db`)
 
 ---
 
-### 1. Clone Project
+## ⚙️ Installation & Setup
 
+### 1️⃣ Clone the repository
 ```bash
 git clone <repo-url>
-cd SmartExpenseTracker
+cd expense-tracker
 ````
 
-### 2. Backend Setup
+---
 
-1. Create virtual environment:
+### 2️⃣ Backend Setup (FastAPI)
 
-```powershell
-python -m venv venv
-```
+1. Navigate to backend folder:
 
-2. Activate virtual environment:
+   ```bash
+   cd backend
+   ```
 
-```powershell
-# Windows PowerShell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-venv\Scripts\activate
-```
+2. Create a virtual environment:
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate       # Mac/Linux
+   venv\Scripts\activate          # Windows
+   ```
 
 3. Install dependencies:
 
-```powershell
-pip install -r backend/requirements.txt
-```
+   ```bash
+   pip install fastapi uvicorn python-multipart sqlalchemy passlib[bcrypt] jose sqlite3
+   ```
 
-4. Initialize SQLite database with schema:
+4. Run the FastAPI server:
 
-```powershell
-python -c "import sqlite3; conn = sqlite3.connect('expenses.db'); conn.executescript(open('backend/schema.sql').read()); conn.close()"
-```
+   ```bash
+   uvicorn main:app --reload
+   ```
 
-5. Insert sample data (optional):
-
-```powershell
-python -c "import sqlite3; conn = sqlite3.connect('expenses.db'); conn.executescript(open('backend/data.sql').read()); conn.close()"
-```
-
-6. Run FastAPI server:
-
-```powershell
-python -m uvicorn backend.main:app --reload --port 8000
-```
-
-Server runs at: `http://127.0.0.1:8000`
-Swagger docs available at: `http://127.0.0.1:8000/docs`
+   * Server runs at: **[http://127.0.0.1:8000](http://127.0.0.1:8000)**
+   * Docs available at: **[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)**
 
 ---
 
-### 3. Frontend Setup
+### 3️⃣ Frontend Setup (React)
 
 1. Navigate to frontend folder:
 
-```powershell
-cd frontend
-```
+   ```bash
+   cd ../frontend
+   ```
 
 2. Install dependencies:
 
-```powershell
-npm install
+   ```bash
+   npm install
+   ```
+
+3. Run React app:
+
+   ```bash
+   npm start
+   ```
+
+   * App runs at: **[http://localhost:3000](http://localhost:3000)**
+
+---
+
+## 🔗 API Endpoints
+
+| Method   | Endpoint              | Description               |
+| -------- | --------------------- | ------------------------- |
+| `POST`   | `/register`           | Register new user         |
+| `POST`   | `/token`              | Get JWT access token      |
+| `GET`    | `/getproducts`        | Get all expenses/products |
+| `POST`   | `/addproduct`         | Add new expense/product   |
+| `DELETE` | `/deleteproduct/{id}` | Delete expense/product    |
+
+---
+
+## 🗄️ Database
+
+SQLite database: **expenses1.db**
+
+Example command to add a new column:
+
+```sql
+ALTER TABLE users ADD COLUMN phone TEXT;
 ```
 
-3. Run Vite development server:
+---
 
-```powershell
-npm run dev
+## 🔐 Authentication
+
+* Login returns a **JWT token**.
+* Token must be stored in **localStorage**.
+* Use token for protected routes.
+
+Example Response:
+
+```json
+{
+  "access_token": "your_token_here",
+  "token_type": "bearer"
+}
 ```
 
-Frontend runs at: `http://localhost:5173`
+---
+
+## 🧰 Folder Structure
+
+```
+project/
+│
+├── backend/
+│   ├── main.py
+│   ├── models.py
+│   ├── database.py
+│   ├── expenses1.db
+│
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   │   ├── LoginPage.js
+│   │   │   ├── RegisterPage.js
+│   │   │   └── Dashboard.js
+│   │   └── App.js
+│   ├── package.json
+│
+└── README.md
+```
 
 ---
 
-## Database Schema
+## 🧑‍💻 Author
 
-**Users Table**
-
-| Column | Type                | Description |
-| ------ | ------------------- | ----------- |
-| id     | INTEGER PRIMARY KEY | User ID     |
-| name   | TEXT                | User name   |
-| email  | TEXT                | User email  |
-
-**Categories Table**
-
-| Column | Type                | Description   |
-| ------ | ------------------- | ------------- |
-| id     | INTEGER PRIMARY KEY | Category ID   |
-| name   | TEXT                | Category name |
-
-**Expenses Table**
-
-| Column      | Type                | Description                   |
-| ----------- | ------------------- | ----------------------------- |
-| id          | INTEGER PRIMARY KEY | Expense ID                    |
-| user_id     | INTEGER             | Foreign key to users(id)      |
-| category_id | INTEGER             | Foreign key to categories(id) |
-| amount      | DECIMAL             | Expense amount                |
-| date        | DATE                | Expense date                  |
-| note        | TEXT                | Optional note                 |
+**Rahul K Milan**
+Junior Software Engineer @ Seguro Technologies
+📧 [[rahulkmilan93@gmail.com](mailto:rahulkmilan93@gmail.com)]
 
 ---
 
-## API Endpoints
+## 🏁 License
 
-| Method | Endpoint                                                       | Description               |
-| ------ | -------------------------------------------------------------- | ------------------------- |
-| POST   | `/api/users`                                                   | Create a new user         |
-| GET    | `/api/users`                                                   | List all users            |
-| POST   | `/api/categories`                                              | Create new category       |
-| GET    | `/api/categories`                                              | List all categories       |
-| POST   | `/api/expenses`                                                | Add new expense           |
-| GET    | `/api/expenses?user_id=<id>`                                   | Fetch expenses for a user |
-| GET    | `/api/reports/monthly_summary?user_id=<id>&year=YYYY&month=MM` | Monthly summary report    |
-
----
-
-## Design Choices & Assumptions
-
-1. **DECIMAL for amount** — ensures precise monetary calculations (avoids float rounding errors).
-2. **Foreign key constraints** — ensures data integrity for users and categories.
-3. **Passing `user_id` in API requests** — simple for proof-of-concept; not secure for production.
-4. **Monthly report aggregation in SQL** — faster for large datasets, reduces backend processing.
-
----
-
-## Usage
-
-1. Start backend server (`uvicorn`)
-2. Start frontend (`npm run dev`)
-3. Open frontend in browser
-4. Select a user → Add expenses → View list → Generate monthly report
-
----
-
-## Optional Improvements (Tier 3)
-
-* Full CRUD operations for expenses
-* JWT-based authentication for multi-user security
-* Form validations (amount > 0, required fields)
-* Data visualization (pie chart/bar chart) for monthly report
-* Dockerization for easy deployment
+This project is open-source and free to use.
 
 ```
