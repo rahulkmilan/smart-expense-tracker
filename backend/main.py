@@ -11,7 +11,7 @@ from decimal import Decimal
 
 # CONFIG
 DB_PATH = "expenses1.db"
-SECRET_KEY = "kjsd8723hdsf87sdf8sd9f8s7df8sd7fsd8fsd7fsd8f7sdf7sd8f7sdf"  
+SECRET_KEY = "your_key"  
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 8  # 8 hours
 
@@ -317,3 +317,4 @@ def monthly_summary(year: str, month: str, current_user: dict = Depends(get_curr
         total += amt
     conn.close()
     return {"total_expenses": format(total, "f"), "expenses_by_category": expenses_by_category}
+
